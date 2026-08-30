@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Atlético Caripito - Escuela de fútbol para niños y jóvenes.">
+    <title>Atlético Caripito | Escuela de Fútbol</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --azul: #102a43;
+            --azul-claro: #2f6690;
+            --rojo: #b9413e;
+            --rojo-hover: #963532;
+            --crema: #f5f3ef;
+            --blanco: #ffffff;
+            --gris: #66788a;
+            --borde: #dfe5ea;
+            --sombra: 0 18px 45px rgba(16, 42, 67, .12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--crema);
+            color: var(--azul);
+            font-family: "Inter", sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .container {
+            width: min(1180px, 90%);
+            margin: auto;
+        }
+
+        /* Navegación */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, .94);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(16, 42, 67, .08);
+        }
+
+        .navbar {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: "Barlow Condensed", sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            line-height: .9;
+        }
+
+        .logo img {
+            width: 58px;
+            height: 58px;
+            object-fit: contain;
+        }
+
+        .logo span span {
+            display: block;
+            color: var(--rojo);
+            font-size: .9rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-links a,
+        .submenu-button {
+            border: 0;
+            background: transparent;
+            color: var(--azul);
+            cursor: pointer;
+            font: inherit;
+            font-weight: 600;
+            padding: 10px 14px;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover,
+        .submenu-button:hover {
+            background: #edf1f4;
+        }
+
+        .submenu {
+            position: relative;
+        }
+
+        .submenu-list {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            min-width: 190px;
+            padding: 8px;
+            list-style: none;
+            background: var(--blanco);
+            border: 1px solid var(--borde);
+            border-radius: 10px;
+            box-shadow: var(--sombra);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: .2s ease;
+        }
+
+        .submenu.active .submenu-list {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .submenu-list a {
+            display: block;
+            width: 100%;
+        }
+
+        .nav-cta,
+        .hero-button {
+            background: var(--rojo) !important;
+            color: var(--blanco) !important;
+        }
+
+        .nav-cta:hover,
+        .hero-button:hover {
+            background: var(--rojo-hover) !important;
+        }
+
+        .menu-button {
+            display: none;
+            border: 0;
+            background: transparent;
+            color: var(--azul);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 650px;
+            display: grid;
+            place-items: center;
+            position: relative;
+            overflow: hidden;
+            color: var(--blanco);
+            background:
+                linear-gradient(90deg, rgba(16,42,67,.96), rgba(16,42,67,.62)),
+                url("imagen/logo.png") center/cover;
+        }
+
+        .hero-content {
+            width: min(1180px, 90%);
+            padding: 90px 0;
+        }
+
+        .eyebrow {
+            color: #d99b96;
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: "Barlow Condensed", sans-serif;
+            line-height: .95;
+        }
+
+        h1 {
+            max-width: 700px;
+            margin: 20px 0;
+            font-size: clamp(3.8rem, 9vw, 7.5rem);
+            text-transform: uppercase;
+        }
+
+        h1 span {
+            color: #d99b96;
+        }
+
+        .hero p {
+            max-width: 560px;
+            color: #e4ebf0;
+            font-size: 1.1rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 21px;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: .2s ease;
+        }
+
+        .button-outline {
+            border: 1px solid rgba(255,255,255,.5);
+            color: var(--blanco);
+        }
+
+        .button-outline:hover {
+            background: rgba(255,255,255,.12);
+        }
+
+        /* Secciones */
+        .section {
+            padding: 90px 0;
+        }
+
+        .section-heading {
+            max-width: 650px;
+            margin-bottom: 35px;
+        }
+
+        .section-heading h2 {
+            margin-top: 10px;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            text-transform: uppercase;
+        }
+
+        .section-heading p {
+            margin-top: 15px;
+            color: var(--gris);
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .card {
+            padding: 28px;
+            background: var(--blanco);
+            border: 1px solid var(--borde);
+            border-radius: 14px;
+            box-shadow: 0 8px 25px rgba(16,42,67,.05);
+        }
+
+        .card-number {
+            color: var(--rojo);
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .card h3 {
+            margin: 16px 0 10px;
+            font-size: 2rem;
+        }
+
+        .card p {
+            color: var(--gris);
+        }
+
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 55px;
+        }
+
+        .about-image {
+            min-height: 420px;
+            border-radius: 16px;
+            background:
+                linear-gradient(135deg, rgba(16,42,67,.2), rgba(185,65,62,.55)),
+                url("imagen/logo.png") center/contain no-repeat,
+                var(--azul);
+            box-shadow: var(--sombra);
+        }
+
+        .contact {
+            color: var(--blanco);
+            background: var(--azul);
+        }
+
+        form {
+            display: grid;
+            gap: 15px;
+            max-width: 700px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--borde);
+            border-radius: 8px;
+            background: var(--blanco);
+            color: var(--azul);
+            font: inherit;
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .form-message {
+            display: none;
+            padding: 12px;
+            border-radius: 8px;
+            background: #d9eee4;
+            color: #24533f;
+        }
+
+        footer {
+            padding: 25px 0;
+            color: var(--gris);
+            font-size: .9rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 850px) {
+            .menu-button {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 76px;
+                left: 5%;
+                right: 5%;
+                display: none;
+                align-items: stretch;
+                padding: 15px;
+                background: var(--blanco);
+                border: 1px solid var(--borde);
+                border-radius: 12px;
+                box-shadow: var(--sombra);
+            }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .nav-links a,
+            .submenu-button {
+                display: block;
+                width: 100%;
+                text-align: left;
+            }
+
+            .submenu-list {
+                position: static;
+                display: none;
+                margin-top: 5px;
+                box-shadow: none;
+                border: 0;
+                background: #f3f6f8;
+            }
+
+            .submenu.active .submenu-list {
+                display: block;
+            }
+
+            .cards,
+            .about {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                min-height: 300px;
+                order: -1;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .logo img {
+                width: 48px;
+                height: 48px;
+            }
+
+            .logo {
+                font-size: 1.05rem;
+            }
+
+            .hero {
+                min-height: 590px;
+            }
+
+            .hero-actions,
+            .button {
+                width: 100%;
+            }
+
+            .section {
+                padding: 65px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container navbar">
+            <a class="logo" href="#inicio">
+                <img src="imagen/logo.png" alt="Logo Atlético Caripito">
+                <span>ATLÉTICO<span>CARIPITO</span></span>
+            </a>
+
+            <button class="menu-button" id="menuButton" aria-label="Abrir menú">
+                ☰
+            </button>
+
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#inicio">Inicio</a></li>
+
+                    <li class="submenu" id="submenu">
+                        <button class="submenu-button" id="submenuButton">
+                            La escuela <span>⌄</span>
+                        </button>
+
+                        <ul class="submenu-list">
+                            <li><a href="#nosotros">Nosotros</a></li>
+                            <li><a href="#metodologia">Metodología</a></li>
+                            <li><a href="#entrenadores">Entrenadores</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#programas">Programas</a></li>
+                    <li><a href="#contacto" class="nav-cta">Inscríbete</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="inicio">
+            <div class="hero-content">
+                <div class="eyebrow">Escuela de fútbol · Caripito</div>
+                <h1>Formamos<br><span>futuras estrellas.</span></h1>
+                <p>
+                    Entrenamiento, disciplina y pasión para que cada jugador
+                    desarrolle su máximo potencial dentro y fuera de la cancha.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="button hero-button" href="#contacto">Solicitar información</a>
+                    <a class="button button-outline" href="#programas">Ver programas</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="nosotros">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="eyebrow">Nuestra filosofía</div>
+                    <h2>Más que fútbol</h2>
+                    <p>
+                        Creamos un entorno seguro y profesional donde los jóvenes
+                        aprenden, compiten y crecen como personas.
+                    </p>
+                </div>
+
+                <div class="about">
+                    <div class="about-image"></div>
+
+                    <div class="cards" id="metodologia">
+                        <article class="card">
+                            <div class="card-number">01</div>
+                            <h3>Técnica</h3>
+                            <p>Dominio del balón, precisión y creatividad.</p>
+                        </article>
+
+                        <article class="card">
+                            <div class="card-number">02</div>
+                            <h3>Disciplina</h3>
+                            <p>Hábitos positivos, compromiso y constancia.</p>
+                        </article>
+
+                        <article class="card" id="entrenadores">
+                            <div class="card-number">03</div>
+                            <h3>Equipo</h3>
+                            <p>Respeto, compañerismo y mentalidad ganadora.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="programas">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="eyebrow">Elige tu categoría</div>
+                    <h2>Programas de formación</h2>
+                </div>
+
+                <div class="cards">
+                    <article class="card">
+                        <h3>Iniciación</h3>
+                        <p>Para niños que comienzan a descubrir su pasión por el fútbol.</p>
+                    </article>
+
+                    <article class="card">
+                        <h3>Formación</h3>
+                        <p>Desarrollo técnico y táctico para jugadores en crecimiento.</p>
+                    </article>
+
+                    <article class="card">
+                        <h3>Competición</h3>
+                        <p>Preparación avanzada para torneos y alto rendimiento.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section contact" id="contacto">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="eyebrow">Da el primer paso</div>
+                    <h2>Únete al equipo</h2>
+                    <p>Déjanos tus datos y te contactaremos con toda la información.</p>
+                </div>
+
+                <form id="contactForm">
+                    <input type="text" id="nombre" placeholder="Nombre del representante" required>
+                    <input type="email" id="correo" placeholder="Correo electrónico" required>
+
+                    <select id="categoria" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option>Iniciación</option>
+                        <option>Formación</option>
+                        <option>Competición</option>
+                    </select>
+
+                    <textarea id="mensaje" placeholder="Mensaje"></textarea>
+                    <button class="button hero-button" type="submit">Enviar solicitud</button>
+                    <div class="form-message" id="formMessage">
+                        ¡Solicitud enviada correctamente!
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <span>© <span id="year"></span> Atlético Caripito</span>
+            <span>Escuela de fútbol · Monagas</span>
+        </div>
+    </footer>
+
+    <script>
+        const menuButton = document.getElementById("menuButton");
+        const navLinks = document.getElementById("navLinks");
+        const submenu = document.getElementById("submenu");
+        const submenuButton = document.getElementById("submenuButton");
+        const contactForm = document.getElementById("contactForm");
+        const formMessage = document.getElementById("formMessage");
+
+        menuButton.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            menuButton.textContent = navLinks.classList.contains("active") ? "×" : "☰";
+        });
+
+        submenuButton.addEventListener("click", () => {
+            submenu.classList.toggle("active");
+        });
+
+        document.querySelectorAll(".nav-links a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+                submenu.classList.remove("active");
+                menuButton.textContent = "☰";
+            });
+        });
+
+        contactForm.addEventListener("submit", event => {
+            event.preventDefault();
+            formMessage.style.display = "block";
+            contactForm.reset();
+
+            setTimeout(() => {
+                formMessage.style.display = "none";
+            }, 5000);
+        });
+
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
